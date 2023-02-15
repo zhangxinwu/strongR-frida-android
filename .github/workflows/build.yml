@@ -13,9 +13,6 @@ jobs:
       FRIDA_VERSION: ${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}
       ALREADY_RELEASE: ${{ steps.checkReleaseVersion.outputs.ALREADY_RELEASE }}
     steps:
-      - name: Setup Debug Session
-        uses: csexton/debugger-action@master
-        
       - name: Pull Frida Latest Release
         id: pullFridaLatestRelease
         uses: actions/github-script@v3.1.0
@@ -83,6 +80,7 @@ jobs:
     needs: [check_version, create_release]
 
     steps:
+    - uses: csexton/debugger-action@master
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
