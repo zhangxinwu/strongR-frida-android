@@ -78,10 +78,6 @@ jobs:
   android_build:
     runs-on: ubuntu-22.04
     needs: [check_version, create_release]
-    strategy:
-      matrix:
-        arch: [x86, x86_64, arm, arm64]
-      fail-fast: false
 
     steps:
     - uses: actions/checkout@v4
