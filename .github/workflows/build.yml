@@ -174,7 +174,6 @@ jobs:
     - name: package build result for Android
       shell: bash
       run: |
-        pushd frida
         
         gzip build-android-arm/subprojects/frida-core/server/frida-server
         gzip build-android-arm64/subprojects/frida-core/server/frida-server
