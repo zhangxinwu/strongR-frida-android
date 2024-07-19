@@ -1,4 +1,4 @@
-更新了一下patch，main报错的问题应该没有了
+由于工作太忙，长时间没搞这个了，所以借用了一下[Ylarod](https://github.com/Ylarod/Florida)的patch，以后这里没更新的话，可以去[Ylarod](https://github.com/Ylarod/Florida)看看
 # strongR-frida-android
 
 Follow [FRIDA](https://github.com/frida/frida) upstream to automatic patch and build an anti-detection version of frida-server for android.
