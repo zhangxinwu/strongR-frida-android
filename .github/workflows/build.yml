@@ -124,23 +124,29 @@ jobs:
         git clone ${{ secrets.PATCH_REPO }}
         export ANDROID_NDK_ROOT=${{ steps.setup-ndk.outputs.ndk-path }}
         git clone --recurse-submodules https://github.com/frida/frida
-        cd frida/subprojects/frida-core
-        git am ../../../Patchs/strongR-frida/frida-core/*.patch
-    - name: two step patch   
-      shell: bash
-      run: |
-        cd frida/subprojects/frida-gum/gum
-        git am ../../../../Patchs/strongR-frida/frida-gum/*.patch
-        cd ../../../
+        cd frida
+        for path in ../Patchs/strongR-frida/*
+        do
+          name=$(basename $path)
+          real=$(realpath $path)
+          echo "Apply patches in $real to frida/subprojects/$name"
+          cd subprojects/$name
+          git am ../../../patches/$name/*.patch
+          cd ../..
+          echo $i
+        done
+        cd ..
         
-    - name: Configure
-      shell: bash
-      run: |
-          cd frida
-          mkdir build-${{ matrix.arch }}
-          cd build-${{ matrix.arch }}
-          ../configure  --host=android-${{ matrix.arch }}
+        ARCHES="android-arm android-arm64 android-x86 android-x86_64"
+        for ARCH in $ARCHES
+        do
+          mkdir build-$ARCH
+          cd build-$ARCH
+          ../frida/configure --host=$ARCH
           make
+          cd ..
+        done
+        
 
     - name: Check release version
       id: checkReleaseVersion
