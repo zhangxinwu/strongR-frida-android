@@ -131,7 +131,7 @@ jobs:
           real=$(realpath $path)
           echo "Apply patches in $real to frida/subprojects/$name"
           cd subprojects/$name
-          git am ../../../patches/$name/*.patch
+          git am ../../../Patchs/strongR-frida/$name/*.patch
           cd ../..
           echo $i
         done
